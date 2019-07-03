@@ -17,9 +17,9 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/', 'Auth\LoginController@showLoginForm');
+//Route::get('/', 'Auth\LoginController@showLoginForm');
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::get('/users/', 'UsersController@index');
 

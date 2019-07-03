@@ -19,7 +19,7 @@ class Assessment extends Model
 
     public function groups()
     {
-        return $this->hasMany(Group::class);
+        return $this->belongsToMany(Group::class);
     }
 
     public function responses()

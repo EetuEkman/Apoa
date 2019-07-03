@@ -9,6 +9,11 @@ use App\User;
 
 class AssessmentsController extends Controller
 {
+    function __construct()
+    {
+        //$this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *

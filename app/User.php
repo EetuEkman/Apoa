@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstName', 'lastName', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -41,14 +41,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function userRole()
+    public function role()
     {
         return $this->belongsTo(UserRole::class);
     }
 
     public function groups()
     {
-        return $this->hasMany(Group::class);
+        return $this->belongsToMany(Group::class);
     }
 
     public function authorOf()

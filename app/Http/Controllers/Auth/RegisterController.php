@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Role;
+use App\Group;
 
 class RegisterController extends Controller
 {
@@ -53,6 +55,10 @@ class RegisterController extends Controller
             'lastName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
+            'group' => ['required'],
+            'role' => ['required']
+
+            //ToDo: Compare the given secret with the role secret if the role id is not 2 (student)
         ]);
     }
 
@@ -64,11 +70,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
             'first_name' => $data['firstName'],
             'last_name' => $data['lastName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => (int)$data['role']
+        ]);
+    }
+
+    // Overriding Illuminate\Foundation\Auth\RegistersUsers
+    // to pass variable to the register view
+    public function showRegistrationForm()
+    {
+        $roles = Role::all('id', 'name');
+        $groups = Group::all('id', 'name');
+
+        return view('auth.register', [
+            'roles' => $roles,
+            'groups' => $groups
         ]);
     }
 }

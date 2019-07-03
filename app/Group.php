@@ -14,11 +14,11 @@ class Group extends Model
 
     public function members()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function assessments()
     {
-        return $this->hasMany(Assessment::class);
+        return $this->belongsToMany(Assessment::class);
     }
 }
