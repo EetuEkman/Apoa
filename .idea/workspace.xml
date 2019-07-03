@@ -106,6 +106,9 @@
       <replace>year</replace>
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -241,6 +244,7 @@
     <option name="width" value="815" />
     <option name="height" value="868" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -389,6 +393,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -428,12 +433,12 @@
       <workItem from="1561531740070" duration="10932000" />
       <workItem from="1561617217896" duration="17015000" />
       <workItem from="1561709644400" duration="9104000" />
-      <workItem from="1562049731887" duration="12646000" />
+      <workItem from="1562049731887" duration="13257000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63633000" />
+    <option name="totallyTimeSpent" value="64244000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -446,7 +451,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49780703" visible="true" weight="0.23378378" />
       <window_info id="Structure" order="1" sideWeight="0.502193" side_tool="true" weight="0.23378378" />
