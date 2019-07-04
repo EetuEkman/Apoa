@@ -4,34 +4,31 @@
 
 @section("content")
 
-    <h1>Luokat</h1>
+<h1>Luokat</h1>
 
-    @if($groups->count() < 1)
-        <p>Ei luokkia.</p>
+@if($groups->count() < 1) <p>Ei luokkia.</p>
     @endif
 
     @if($groups->count() >= 1)
 
-        <table id="groups" class="table-bordered">
+    <table id="groups" class="table-bordered">
 
-            <caption>Luokat</caption>
+        @foreach($groups as $group)
+        <tr>
+            <td>{{$group->name}}</td>
+            <td>{{$group->description}}</td>
+            <td>
+                <button value="Muokkaa" onclick="window.location.replace('/groups/{{ $group->id }}/edit')">
+                    Muokkaa
+                </button>
+            </td>
+        </tr>
+        @endforeach
 
-            @foreach($groups as $group)
-                <tr>
-                    <td>{{$group->name}}</td>
-                    <td>{{$group->description}}</td>
-                    <td>
-                        <button value="Muokkaa" onclick="window.location.replace('/groups/{{ $group->id }}/edit')">
-                            Muokkaa
-                        </button>
-                    </td>
-                </tr>
-            @endforeach
-
-        </table>
+    </table>
 
     @endif
 
     <a href="/groups/create">Luo luokka</a>
 
-@endsection
+    @endsection

@@ -23,8 +23,10 @@
         <input type="text" name="semester" value="{{ $group->semester }}"><br><br>
 
         <input type="submit" value="Ok">
-        <button onclick="window.location.href = '/groups'">Peruuta</button>
+        
     </form>
+
+    <button onclick="window.location.href='/groups'">Peruuta</button>
 
     <br>
     <br>

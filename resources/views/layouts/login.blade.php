@@ -22,6 +22,8 @@
 
 <div id="app">
 
+    <img src="{{ asset('images/apoa.png') }}" width="500" height="500" alt="">
+
     <div class="content">
 
         <!--[if lt IE 7]>

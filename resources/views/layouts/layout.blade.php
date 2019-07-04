@@ -7,7 +7,8 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9">                 <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js">                        <!--<![endif]-->
+<html class="no-js">
+<!--<![endif]-->
 
 <head>
     <meta charset="utf-8">
@@ -15,36 +16,66 @@
     <title>@yield("title")</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
 
-<div id="app">
+    <div id="app">
 
-    <div class="content">
+        <header style="background: indigo">
 
-        <ul>
-            <li><a href="/">Login</a></li>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/assessments">Omat arviot</a></li>
-            <li><a href="/response">Jätä arvio</a></li>
-            <li><a href="/help">Apua</a></li>
-            <li><a href="/users">Käyttäjät</a></li>
-            <li><a href="/add">Lisää</a></li>
-            <li><a href="/groups">Luokat</a></li>
-        </ul>
+            <nav class="navbar">
 
-        <!--[if lt IE 7]>
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/"><img src="{{ asset('images/apoa.png') }}" width="50" height="50"></a>
+                </div>
+
+                <div class="navbar-menu">
+
+                    <div class="navbar-start">
+                        <a class="navbar-item" href="/assessments">Omat arviot</a>
+                        <a class="navbar-item" href="/responses">Jätä arvio</a>
+                        <a class="navbar-item" href="/assessments">Arviointi</a>
+                        <a class="navbar-item" href="/users">Käyttäjät</a>
+                        <a class="navbar-item" href="/groups">Luokat</a>
+                    </div>
+
+                    <div class="navbar-end">
+                        <a class="navbar-item" href="user/{{Auth::user()->id}}/edit">{{Auth::user()->email}}</a>
+                        <a class="navbar-item" href="/logout"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{__('Kirjaudu ulos')}}
+                        </a>
+
+                        <form id="logout-form" action="/logout" method="post" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+
+                </div>
+
+            </nav>
+
+        </header>
+
+        <div class="content">
+
+            <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser.
             Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        @yield("content")
+            @yield("content")
+
+        </div>
+
+        <footer style="background: darkblue">
+            <p>Savonia-Ammattikorkeakoulu</p>
+        </footer>
 
     </div>
-
-</div>
 
 </body>
 
