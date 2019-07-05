@@ -4,70 +4,80 @@
 
     <form method="POST" action="{{ route('register') }}">
 
-        @csrf
+    @csrf
 
-        <!-- Email / username -->
+    <!-- Email / username -->
+        <div class="field">
+            <label class="label">{{ __('Sähköposti') }}</label>
+            <div class="control">
+                <input id="email" class="input" type="email" name="email"
+                       value="{{ old('email') }}" required autocomplete="email">
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
 
-        <label for="email">{{ __('Sähköposti') }}</label>
+        </div>
 
-        <input id="email" type="email" name="email"
-               value="{{ old('email') }}" required autocomplete="email">
-
-        @error('email')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
 
         <!-- First name -->
 
-        <label for="firstName">{{ __('Etunimi') }}</label>
+        <div class="field">
+            <label class="label">{{ __('Etunimi') }}</label>
+            <div class="control">
+                <input id="firstName" type="text"
+                       class="input @error('name') is-invalid @enderror" name="firstName"
+                       value="{{ old('firstName') }}" required autocomplete="firstName" autofocus>
+                @error('firstName')
+                <span role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
 
-        <input id="firstName" type="text"
-               class="form-control @error('name') is-invalid @enderror" name="firstName"
-               value="{{ old('firstName') }}" required autocomplete="firstName" autofocus>
+    <!-- Last name -->
 
-        @error('firstName')
-        <span role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-
-        <!-- Last name -->
-
-        <label for="lastName">{{ __('Sukunimi') }}</label>
-
-        <input id="lastName" type="text" name="lastName"
-               value="{{ old('lastName') }}" required autocomplete="lastName" autofocus>
-
-        @error('name')
-            <span role="alert"><strong>{{ $message }}</strong></span>
-        @enderror
-
-        <br>
+        <div class="field">
+            <label class="label">{{ __('Sukunimi') }}</label>
+            <div class="control">
+                <input id="lastName" class="input" type="text" name="lastName"
+                       value="{{ old('lastName') }}" required autocomplete="lastName" autofocus>
+                @error('name')
+                    <span role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+            </div>
+        </div>
 
         <!-- Password -->
 
-        <label for="password">{{ __('Salasana') }}</label>
+        <div class="field">
+            <label class="label">{{ __('Salasana') }}</label>
+            <div class="control">
+                <input id="password" type="password"
+                       class="form-control @error('password') is-invalid @enderror" name="password"
+                       required autocomplete="new-password">
+                @error('password')
+                    <span role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
 
-        <input id="password" type="password"
-               class="form-control @error('password') is-invalid @enderror" name="password"
-               required autocomplete="new-password">
-
-        @error('password')
-        <span role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
 
         <!-- Confirm password -->
 
-        <label for="password-confirm">{{ __('Salasanan varmistus') }}</label>
+        <div class="field">
+            <label class="label">{{ __('Salasanan varmistus') }}</label>
+            <div class="control">
+                <input id="password-confirm" type="password" class="form-control"
+                       name="password_confirmation" required autocomplete="new-password">
+            </div>
+        </div>
 
-        <input id="password-confirm" type="password" class="form-control"
-               name="password_confirmation" required autocomplete="new-password">
-
-        <br>
 
         <!-- User role -->
 
@@ -113,17 +123,13 @@
         var secret = document.getElementById('secret');
         var secretLabel = document.getElementById('secretLabel');
 
-        function toggleSecret()
-        {
-            if(role.value == 2)
-            {
+        function toggleSecret() {
+            if (role.value == 2) {
                 secret.style.visibility = 'hidden';
                 secret.value = '';
                 secretLabel.style.visibility = 'hidden';
 
-            }
-            else
-            {
+            } else {
                 secret.style.visibility = 'visible';
                 secret.value = '';
                 secretLabel.style.visibility = 'visible';

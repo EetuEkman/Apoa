@@ -1,6 +1,8 @@
 @extends('layouts/login')
 
 @section('content')
+
+<!--
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -70,17 +72,39 @@
         </div>
     </div>
 </div>
+-->
 
-<h1>Tervetuloa</h1>
-    <p>Tervetuloa käyttämään itsearviointityökalua.</p>
-    <p>Aloita kirjautumalla sisään.</p>
+<div>
 
     <form action="/home" method="get">
-        Käyttäjätunnus <input type="text" placeholder="sähkö.posti@osoite.fi"><br>
-        Salasana <input type="password"><br>
-        <input type="submit" value="Kirjaudu"><br>
+        <div class="field">
+            <label class="label">Käyttäjätunnus</label>
+            <div class="control has-icons-left">
+                <input type="text" class="input" placeholder="sähkö.posti@osoite.fi">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                </span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Salasana</label>
+            <div class="control has-icons-left">
+                <input type="password" class="input" placeholder="salasana">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                </span>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input type="submit" class="button is-primary" value="Kirjaudu">
+            </div>
+        </div>
     </form>
 
-    <a href="/login/create">Luo käyttäjätunnus</a><br>
+    <a href="/register">Luo käyttäjätunnus</a><br>
     <a href="">Unohtunut salasana</a>
+
+</div>
+
 @endsection

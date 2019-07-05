@@ -1,15 +1,3 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Bulma
-@import '~bulma/bulma';
-
-// Using bulma instead of bootstrap
-// Commenting out the dependency
-// to avoid clashes
-
-// Variables
-//@import 'variables';
-
-// Bootstrap
-//@import '~bootstrap/scss/bootstrap';
+//Bulma
+@import "~bulma/bulma.sass";
+@import "~font-awesome/scss/font-awesome.scss";

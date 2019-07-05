@@ -71,10 +71,6 @@
 
         </div>
 
-        <footer style="background: darkblue">
-            <p>Savonia-Ammattikorkeakoulu</p>
-        </footer>
-
     </div>
 
 </body>
