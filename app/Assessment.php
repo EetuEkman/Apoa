@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Assessment extends Model
 {
-    protected $fillable = ['title', 'question', 'firstName', 'lastName'];
+    protected $fillable = ['title', 'body', 'user_id'];
 
-    public function author()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

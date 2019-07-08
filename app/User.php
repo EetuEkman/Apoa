@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(UserRole::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function groups()
@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class);
     }
 
-    public function authorOf()
+    public function assessments()
     {
         return $this->hasMany(Assessment::class);
     }

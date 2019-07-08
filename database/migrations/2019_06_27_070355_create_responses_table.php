@@ -18,7 +18,7 @@ class CreateResponsesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('assessment_id');
             $table->tinyInteger('grade');
-            $table->text('answer');
+            $table->text('body');
             $table->timestamps();
         });
     }

@@ -1,10 +1,12 @@
 @extends("layouts/layout")
 
-@section("title", "Luokat")
+@section("title", "Koti")
 
 @section("content")
-
-    <h1>Tervetuloa, {{ Auth::user()->first_name }}.</h1>
-    <p>Tervetuloa käyttämään itsearviointityökalua.</p>
-
+    <div class="columns is-centered">
+        <div class="column">
+            <h2>Tervetuloa,</h2>
+            <h1>{{ Auth::user()->first_name }}.</h1>
+        </div>
+    </div>
 @endsection

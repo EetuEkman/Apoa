@@ -12,7 +12,7 @@ class Group extends Model
 {
     protected $fillable = ['name', 'description', 'year', 'semester'];
 
-    public function members()
+    public function users()
     {
         return $this->belongsToMany(User::class);
     }

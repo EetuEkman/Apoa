@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Assessment;
 use App\Group;
 use App\User;
@@ -21,21 +22,9 @@ class AssessmentsController extends Controller
      */
     public function index()
     {
-        $assessments = Assessment::all();
+        //$assessments = Assessment::all();
 
-        /* Tried to add the user to the assessment collection
-
-        foreach($assessments as $key => $assessment)
-        {
-            $user = User::find($assessment['user_id']);
-            $assessments[$key]['firstName'] = $user['firstName'];
-            $assessments[$key]['lastName'] = $user['lastName'];
-        }
-
-        */
-
-        // ToDo: Join the users first and last names based on the foreign key and pass to view
-
+        $assessments = Assessment::where('user_id', Auth::user()->id)->with('user')->get();
 
         return view('assessments/index', [
             'assessments' => $assessments,
@@ -64,10 +53,17 @@ class AssessmentsController extends Controller
      */
     public function store(Request $request)
     {
+        $request()->validate([
+            'user_id' => 'required',
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
         $assessment = new Assessment();
 
         $assessment->request('title');
-        $assessment->request('question');
+        $assessment->request('body');
+        $assessment->request('user_id');
 
         $assessment->save();
 
@@ -99,12 +95,9 @@ class AssessmentsController extends Controller
     {
         $assessment = Assessment::findOrFail($id);
 
-        $assessment->title = request('title');
-        $assessment->question = request('question');
-
-        $assessment->save();
-
-        return redirect('/assessments');
+        return view('assessments/edit', [
+            'assessment' => $assessment
+        ]);
     }
 
     /**
@@ -116,7 +109,14 @@ class AssessmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $assessment = Assessment::findOrFail($id);
+
+        $assessment->title = request('title');
+        $assessment->body = request('body');
+
+        $assessment->save();
+
+        return redirect('/assessments');
     }
 
     /**

@@ -17,7 +17,7 @@ class CreateAssessmentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
-            $table->text('question');
+            $table->text('body');
             $table->timestamps();
         });
     }

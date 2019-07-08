@@ -22,38 +22,26 @@
 <body>
 
 <div id="app" class="columns is-vcentered">
-
-    <div class="column"></div>
-
+    <div class="column is-two-fifths"></div>
     <div class="column">
-
         <div class="columns is-centered">
-
             <div class="column">
-
-                <img src="{{ asset('images/apoa.png') }}" width="500" height="500" alt="">
-
-                <div class="content has-text-centered">
-
-                    <!--[if lt IE 7]>
-                    <p class="browsehappy">
+                <div class="container">
+                    <img src="{{ asset('images/apoa.png') }}" width="500" height="500" alt="" style="justify-content: center;">
+                    <div class="content">
+                        <!--[if lt IE 7]>
+                        <p class="browsehappy">
                         You are using an <strong>outdated</strong> browser.
                         Please <a href="#">upgrade your browser</a> to improve your experience.
-                    </p>
-                    <![endif]-->
-
-                    @yield("content")
-
+                        </p>
+                        <![endif]-->
+                        @yield("content")
+                    </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-    <div class="column"></div>
-
+    <div class="column is-two-fifths"></div>
 </div>
 
 </body>

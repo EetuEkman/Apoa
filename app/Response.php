@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Response extends Model
 {
-    protected $fillable = ['grade', 'answer'];
+    protected $fillable = ['grade', 'body'];
 
-    public function responseTo()
+    public function assessment()
     {
         return $this->belongsTo(Assessment::class);
     }
 
-    public function respondent()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

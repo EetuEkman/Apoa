@@ -1,7 +1,5 @@
 @extends('layouts/login')
-
 @section('content')
-
 <!--
 <div class="container">
     <div class="row justify-content-center">
@@ -73,14 +71,13 @@
     </div>
 </div>
 -->
-
 <div>
-
-    <form action="/home" method="get">
+    <form action="/login" method="post">
+        @csrf
         <div class="field">
             <label class="label">Käyttäjätunnus</label>
             <div class="control has-icons-left">
-                <input type="text" class="input" placeholder="sähkö.posti@osoite.fi">
+                <input type="text" id="email" class="input" name="email" placeholder="sähkö.posti@osoite.fi">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -89,7 +86,7 @@
         <div class="field">
             <label class="label">Salasana</label>
             <div class="control has-icons-left">
-                <input type="password" class="input" placeholder="salasana">
+                <input type="password" id="password" class="input" name="password" placeholder="salasana">
                 <span class="icon is-small is-left">
                     <i class="fa fa-lock"></i>
                 </span>
@@ -97,14 +94,11 @@
         </div>
         <div class="field">
             <div class="control">
-                <input type="submit" class="button is-primary" value="Kirjaudu">
+                <input type="submit" name="submit" class="button is-primary" value="Kirjaudu">
             </div>
         </div>
     </form>
-
     <a href="/register">Luo käyttäjätunnus</a><br>
     <a href="">Unohtunut salasana</a>
-
 </div>
-
 @endsection
