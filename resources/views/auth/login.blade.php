@@ -15,7 +15,8 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email')
+    is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +30,8 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password')
+    is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -42,7 +44,8 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="remember"
+                                    id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
@@ -71,34 +74,50 @@
     </div>
 </div>
 -->
-<div>
-    <form action="/login" method="post">
-        @csrf
-        <div class="field">
-            <label class="label">Käyttäjätunnus</label>
-            <div class="control has-icons-left">
-                <input type="text" id="email" class="input" name="email" placeholder="sähkö.posti@osoite.fi">
-                <span class="icon is-small is-left">
-                    <i class="fa fa-user"></i>
+<article class="card is-rounded">
+    <div class="card-content">
+        <h1 class="title">
+            <img src="{{asset('images/apoa.png')}}" width="250" height="250" alt="logo">
+        </h1>
+        <form action="{{route('login')}}" method="post">
+            @csrf
+            <p class="control has-icons-left">
+                <input type="email" class="input @error('email') is-danger @enderror" name="email" placeholder="{{__('Sähköposti')}}">
+
+                <span class="icon is-left">
+                    <i class="fa fa-envelope"></i>
                 </span>
-            </div>
-        </div>
-        <div class="field">
-            <label class="label">Salasana</label>
-            <div class="control has-icons-left">
-                <input type="password" id="password" class="input" name="password" placeholder="salasana">
-                <span class="icon is-small is-left">
+            </p>
+            @error('email')
+                <span class="is-danger">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <p class="control has-icons-left">
+                <input type="password" class="input @error('password') is-danger @enderror" name="password" placeholder="Salasana">
+                <span class="icon is-left">
                     <i class="fa fa-lock"></i>
                 </span>
-            </div>
-        </div>
-        <div class="field">
-            <div class="control">
-                <input type="submit" name="submit" class="button is-primary" value="Kirjaudu">
-            </div>
-        </div>
-    </form>
-    <a href="/register">Luo käyttäjätunnus</a><br>
-    <a href="">Unohtunut salasana</a>
-</div>
+            </p>
+            @error('password')
+                <span class="is-danger" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <p class="control">
+                <label class="checkbox">
+                    <input type="checkbox" name="remember" {{old('remember') ? 'checked' : ''}}>
+                    Muista minut
+                </label>
+            </p>
+            <p class="control">
+                <button class="button is-primary is-medium is-fullwidth">
+                    {{__('Kirjaudu sisään')}}
+                </button>
+            </p>
+        </form>
+        <a href="{{route('register')}}" class="is-centered">{{__('Luo käyttäjätunnus')}}</a><br>
+        <a href="{{route('password.request')}}">{{ __('Unohditko salasanasi?')}}</a>
+    </div>
+</article>
 @endsection

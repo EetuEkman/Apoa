@@ -19,31 +19,21 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
-<body>
-
-<div id="app" class="columns is-vcentered">
-    <div class="column is-two-fifths"></div>
-    <div class="column">
-        <div class="columns is-centered">
-            <div class="column">
-                <div class="container">
-                    <img src="{{ asset('images/apoa.png') }}" width="500" height="500" alt="" style="justify-content: center;">
-                    <div class="content">
-                        <!--[if lt IE 7]>
-                        <p class="browsehappy">
-                        You are using an <strong>outdated</strong> browser.
-                        Please <a href="#">upgrade your browser</a> to improve your experience.
-                        </p>
-                        <![endif]-->
-                        @yield("content")
-                    </div>
-                </div>
+<body class="layout-default">
+<!--[if lt IE 7]>
+<p class="browsehappy">
+    You are using an <strong>outdated</strong> browser.
+    Please <a href="#">upgrade your browser</a> to improve your experience.
+</p>
+<![endif]-->
+<section class="hero is-fullheight is-primary is-medium is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                @yield("content")
             </div>
         </div>
     </div>
-    <div class="column is-two-fifths"></div>
-</div>
-
+</section>
 </body>
-
 </html>
