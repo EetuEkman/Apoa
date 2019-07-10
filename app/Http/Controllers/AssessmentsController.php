@@ -12,7 +12,7 @@ class AssessmentsController extends Controller
 {
     function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -53,7 +53,7 @@ class AssessmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $request()->validate([
+        request()->validate([
             'user_id' => 'required',
             'title' => 'required',
             'body' => 'required'

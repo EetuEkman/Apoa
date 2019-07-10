@@ -83,7 +83,6 @@
             @csrf
             <p class="control has-icons-left">
                 <input type="email" class="input @error('email') is-danger @enderror" name="email" placeholder="{{__('Sähköposti')}}">
-
                 <span class="icon is-left">
                     <i class="fa fa-envelope"></i>
                 </span>
@@ -94,13 +93,13 @@
                 </span>
             @enderror
             <p class="control has-icons-left">
-                <input type="password" class="input @error('password') is-danger @enderror" name="password" placeholder="Salasana">
+                <input type="password" class="input @error('password') is-danger @enderror" name="password" placeholder="{{__('Salasana')}}">
                 <span class="icon is-left">
                     <i class="fa fa-lock"></i>
                 </span>
             </p>
             @error('password')
-                <span class="is-danger" role="alert">
+                <span class="is-danger">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
@@ -121,3 +120,4 @@
     </div>
 </article>
 @endsection
+

@@ -15,8 +15,8 @@ class CreateResponsesTable extends Migration
     {
         Schema::create('responses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('assessment_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('assessment_id');
             $table->tinyInteger('grade');
             $table->text('body');
             $table->timestamps();

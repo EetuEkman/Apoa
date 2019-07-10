@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Response;
 
 class ResponsesController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class ResponsesController extends Controller
      */
     public function index()
     {
-        $responses = Response::all();
+        $responses = Response::where('user_id', Auth::user()->id)->with('assessment')->get();
 
         return view('Responses\index', [
             'responses' => $responses,
