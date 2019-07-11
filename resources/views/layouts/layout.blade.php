@@ -17,9 +17,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 </head>
 
-<body>
+<body class="has-navbar-fixed-top">
     @include('partials.navigation')
     <div class="content">
         <!--[if lt IE 7]>
