@@ -14,34 +14,67 @@
     </div>
 
     <div class="container">
-        <canvas id="myChart" width="100" height="100"></canvas>
+        <canvas id="myChart" width="100" height="500"></canvas>
+    </div>
+
+    <div class="container">
+        <ul id="assessmentList">
+
+        </ul>
+    </div>
+
+    <div id="accordion">
+        <h3>First header</h3>
+        <div>First content panel</div>
+        <h3>Second header</h3>
+        <div>Second content panel</div>
     </div>
 
     <script defer>
         const myTable = document.getElementById('myTable');
-        const rawResponses = JSON.parse('{!! json_encode($responses) !!}');
         const context = document.getElementById('myChart').getContext('2d');
+        const assessmentList = document.getElementById('assessmentList');
 
-        //Substring out the dates from the datetimes
+        //console.log("Responses: " + JSON.stringify(responses, null, 1));
 
-        const responses = rawResponses.map(function(response) {
-            response.created_at = response.created_at.substring(0, response.created_at.indexOf(' '));
+        // Get the array of assessment ids from the json response
+        let assessmentIds = responses.map(function(response) {
+            return response.assessment_id;
+        });
 
-            return response;
-        })
+        // Get the unique set of assessment id's from the array of assessment ids.
+        let uniqueAssessmentIds = Array.from(new Set(assessmentIds));
 
-        //ToDo: make the chart work
+        // For each unique ids create a list element and append to the list
+        uniqueAssessmentIds.forEach(function(element) {
+            let found = responses.find(function(el) {
+                return el.assessment_id === element;
+            });
+
+            let assessment = found.assessment;
+
+            let listItem = document.createElement('LI');
+
+            let text = "Otsikko: " + assessment.title + " Sisältö: " + assessment.body;
+
+            let textNode = document.createTextNode(text);
+
+            listItem.appendChild(textNode);
+
+            assessmentList.appendChild(listItem);
+        });
 
         const myChart = new Chart(context, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Päivämäärä',
+                    label: 'Numero',
                     data: []
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -54,6 +87,7 @@
             }
         });
 
+        //Create the table
         responses.forEach(function(element) {
             let row = myTable.insertRow();
             let title = row.insertCell(0);
@@ -75,28 +109,53 @@
 
         function updateChart(assessmentId)
         {
-            console.log("A button is pressed. assessmentId: " + assessmentId);
-
             let filteredResponses = responses.filter(response => {
                 return response.assessment_id === assessmentId;
             });
 
-            console.log("Filtered responses: " + JSON.stringify(filteredResponses));
-
-            let labels = filteredResponses.map(function(element) {
-                return element.created_at;
+            let datesGrades = filteredResponses.map(response => {
+               return { 'date': response.created_at, 'grade': response.grade };
             });
 
-            console.log("Labels: " + labels);
+            //Sort the dates and grades by the earliest date
+            datesGrades.sort(function(a, b) {
+               a = new Date(a.date);
+               b = new Date(b.date);
 
-            let grades = filteredResponses.map(function(element) {
-                return element.grade;
+               if(a < b)
+               {
+                   return -1;
+               }
+               else
+               {
+                   if(a > b)
+                   {
+                       return 1;
+                   }
+                   else
+                   {
+                       return 0;
+                   }
+               }
+
+               //Ternary version
+               //return a < b ? -1 : a > b ? 1 : 0;
             });
 
-            console.log("Grades: " + grades);
+            let dates = datesGrades.map(function(dateGrade) {
+                return dateGrade.date;
+            });
 
-            myChart.data.labels = labels;
+            let grades = datesGrades.map(function(dateGrade) {
+                return dateGrade.grade;
+            });
+
+            myChart.data.labels = dates;
             myChart.data.datasets[0].data = grades;
+
+            myChart.update();
         }
     </script>
+
+    <script defer>var accordions = bulmaAccordion.attach();</script>
 @endsection

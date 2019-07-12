@@ -22,6 +22,19 @@
         crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        @if(isset($responses))
+            //Convert the php variable to json
+            //and substring out the dates from the datetimes
+            const responses = JSON.parse('{!! json_encode($responses) !!}')
+                .map(function(response) {
+                    response.created_at = response.created_at.substring(0, response.created_at.indexOf(' '));
+
+                    return response;
+                });
+        @endif
+    </script>
 </head>
 
 <body class="has-navbar-fixed-top">
