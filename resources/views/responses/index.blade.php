@@ -23,13 +23,6 @@
         </ul>
     </div>
 
-    <div id="accordion">
-        <h3>First header</h3>
-        <div>First content panel</div>
-        <h3>Second header</h3>
-        <div>Second content panel</div>
-    </div>
-
     <script defer>
         const myTable = document.getElementById('myTable');
         const context = document.getElementById('myChart').getContext('2d');
@@ -156,6 +149,4 @@
             myChart.update();
         }
     </script>
-
-    <script defer>var accordions = bulmaAccordion.attach();</script>
 @endsection

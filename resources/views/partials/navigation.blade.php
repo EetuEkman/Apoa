@@ -1,15 +1,15 @@
-<navbar class="navbar is-fixed-top">
+<navbar id="burger" class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/home">
             Apoa
         </a>
-        <a class="navbar-burger burger">
+        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" v-on:click="toggle" v-bind:class="{'is-active': isActive}">
             <span></span>
             <span></span>
             <span></span>
         </a>
     </div>
-    <div class="navbar-menu">
+    <div class="navbar-menu" v-bind:class="{'is-active': isActive}">
         <div class="navbar-start">
             <a class="navbar-item" href="/assessments">Arvioinnit</a>
             <a class="navbar-item" href="/responses">Vastaukset</a>
@@ -29,14 +29,17 @@
     </div>
 </navbar>
 
-<script>
-    $(document).ready(function () {
-        // Check for click events on the navbar burger icon
-        $(".navbar-burger").click(function () {
-            // Toggle the "is-active" class on both the "navbar-burger"
-            // and the "navbar-menu"
-            $(".navbar-burger").toggleClass("is-active");
-            $(".navbar-menu").toggleClass("is-active");
-        });
+<script defer>
+    new Vue({
+        el: '#burger',
+        data: {
+            isActive: false
+        },
+        methods: {
+            toggle: function() {
+                console.log("clicked")
+                this.isActive = !this.isActive;
+            }
+        }
     });
 </script>

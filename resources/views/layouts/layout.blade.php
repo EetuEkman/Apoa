@@ -15,19 +15,14 @@
     <title>@yield("title")</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous">
-    </script>
+    <script src="{{asset('js/app.js')}}"></script>
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         @if(isset($responses))
             //Convert the php variable to json
             //and substring out the dates from the datetimes
-            const responses = JSON.parse('{!! json_encode($responses) !!}')
+            const responses = JSON.parse('{!!json_encode($responses)!!}')
                 .map(function(response) {
                     response.created_at = response.created_at.substring(0, response.created_at.indexOf(' '));
 

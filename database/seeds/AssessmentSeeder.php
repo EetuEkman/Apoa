@@ -13,32 +13,32 @@ class AssessmentSeeder extends Seeder
     {
         DB::table('assessments')->insert([
             'user_id' => 1,
-            'title' => Str::random(10),
-            'body' => "Oletko ".Str::random(32)."?"
+            'title' => file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=1&format=text'),
+            'body' =>  file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=2&format=text'),
         ]);
 
         DB::table('assessments')->insert([
             'user_id' => 1,
-            'title' => Str::random(14),
-            'body' => "Miten ".Str::random(28)."?"
+            'title' => file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=1&format=text'),
+            'body' =>  file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=2&format=text'),
         ]);
 
         DB::table('assessments')->insert([
             'user_id' => 1,
-            'title' => Str::random(10),
-            'body' => "Kuinka ".Str::random(36)."?"
+            'title' => file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=1&format=text'),
+            'body' =>  file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=2&format=text'),
         ]);
 
         DB::table('assessments')->insert([
             'user_id' => 3,
-            'title' => Str::random(10),
-            'body' => "Tarvitsetko ".Str::random(25)."?"
+            'title' => file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=1&format=text'),
+            'body' =>  file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=2&format=text'),
         ]);
 
         DB::table('assessments')->insert([
             'user_id' => 3,
-            'title' => Str::random(12),
-            'body' => "Koetko ".Str::random(30)."?"
+            'title' => file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=1&format=text'),
+            'body' =>  file_get_contents('https://baconipsum.com/api/?type=all-meat&sentences=2&format=text'),
         ]);
     }
 }
