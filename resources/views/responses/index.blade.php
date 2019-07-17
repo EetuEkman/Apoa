@@ -17,15 +17,90 @@
         <canvas id="myChart" width="100" height="500"></canvas>
     </div>
 
-    <div class="container">
-        <ul id="assessmentList">
-
+    <div id="vueList" class="container">
+        <ul style="list-style-type: none;">
+            <li v-for="assessment in assessments">
+                <ul>
+                    <li>Otsikko: @{{assessment.title}}</li>
+                    <li>Kysymys: @{{assessment.body}}</li>
+                </ul>
+                <ul style="list-style-type: none;">
+                    <li v-for="response in assessment.responses">
+                        <ul>
+                            <li>Arvosana: @{{response.grade}}</li>
+                            <li>Teksti: @{{response.body}}</li>
+                            <li>Päivämäärä: @{{response.created_at}}</li>
+                            <hr>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 
     <script defer>
+        // Get an array of assessment ids from the json response
+
+        let assessmentIds = responses.map(function(response) {
+            return response.assessment_id;
+        });
+
+        // Get the unique set of assessment ids from the array of assessment ids.
+
+        let uniqueAssessmentIds = Array.from(new Set(assessmentIds));
+
+        // Get the first assessment object of each response of each unique assessment id
+
+        let firstResponses = [];
+
+        uniqueAssessmentIds.forEach(function(assessmentId) {
+            let response = responses.find(function(element) {
+               return element.assessment_id == assessmentId;
+            });
+
+            firstResponses.push(response);
+        });
+
+        let filteredAssessments = [];
+
+        // Get the responses for each assessment
+        // and add as an array of response objects for assessment
+
+        firstResponses.forEach(function(firstResponse) {
+            //[{response1, assessment_id=1},{response, assessment_id=2}]
+
+            // Get the responses where assessment_id equals assessments id as an array
+
+            let filteredResponses = responses.filter(function(response) {
+                return response.assessment_id == firstResponse.assessment_id;
+            });
+
+            // Add the array as responses to assessment
+
+            firstResponse.assessment.responses = filteredResponses;
+
+            filteredAssessments.push(firstResponse.assessment);
+        });
+
+        var wm = new Vue({
+           el: '#vueList',
+           data: {
+               assessments: filteredAssessments
+           },
+            methods: {
+
+            }
+        });
+    </script>
+
+    <script defer>
         const myTable = document.getElementById('myTable');
         const context = document.getElementById('myChart').getContext('2d');
+
+        // Switched to vue
+
+        /*
+
         const assessmentList = document.getElementById('assessmentList');
 
         //console.log("Responses: " + JSON.stringify(responses, null, 1));
@@ -35,7 +110,7 @@
             return response.assessment_id;
         });
 
-        // Get the unique set of assessment id's from the array of assessment ids.
+        // Get the unique set of assessment ids from the array of assessment ids.
         let uniqueAssessmentIds = Array.from(new Set(assessmentIds));
 
         // For each unique ids create a list element and append to the list
@@ -57,6 +132,8 @@
             assessmentList.appendChild(listItem);
         });
 
+        */
+
         const myChart = new Chart(context, {
             type: 'line',
             data: {
@@ -76,11 +153,17 @@
                             beginAtZero: true
                         }
                     }]
+                },
+                elements: {
+                    line: {
+                        tension: 0
+                    }
                 }
             }
         });
 
-        //Create the table
+        // Create the table
+
         responses.forEach(function(element) {
             let row = myTable.insertRow();
             let title = row.insertCell(0);

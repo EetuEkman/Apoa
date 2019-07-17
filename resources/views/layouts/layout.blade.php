@@ -18,6 +18,7 @@
     <script src="{{asset('js/app.js')}}"></script>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
     <script>
         @if(isset($responses))
             //Convert the php variable to json
@@ -28,6 +29,7 @@
 
                     return response;
                 });
+            //console.log(JSON.stringify(responses));
         @endif
     </script>
 </head>
