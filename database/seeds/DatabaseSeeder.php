@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             GroupSeeder::class,
             UserSeeder::class,
             AssessmentSeeder::class,
-            ResponseSeeder::class
+            ResponseSeeder::class,
+            GroupUserSeeder::class
         ]);
     }
 }

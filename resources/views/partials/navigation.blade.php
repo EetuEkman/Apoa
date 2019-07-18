@@ -11,13 +11,17 @@
     </div>
     <div class="navbar-menu" v-bind:class="{'is-active': isActive}">
         <div class="navbar-start">
-            <a class="navbar-item" href="/assessments">Arvioinnit</a>
-            <a class="navbar-item" href="/responses">Vastaukset</a>
-            <a class="navbar-item" href="/users">Käyttäjät</a>
-            <a class="navbar-item" href="/groups">Luokat</a>
+            @if(auth()->user()->role_id == 2)
+                <a class="navbar-item" href="/responses/create">Jätä vastaus</a>
+                <a class="navbar-item" href="/responses">Omat vastaukset</a>
+            @else
+                <a class="navbar-item" href="/assessments">Arvioinnit</a>
+                <a class="navbar-item" href="/users">Käyttäjät</a>
+                <a class="navbar-item" href="/groups">Luokat</a>
+            @endif
         </div>
         <div class="navbar-end">
-            <a class="navbar-item" href="user/{{auth()->user()->id}}/edit">{{auth()->user()->email}}</a>
+            <a class="navbar-item" href="users/{{auth()->user()->id}}/edit">{{auth()->user()->email}}</a>
             <a class="navbar-item" href="/logout"
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 {{__('Kirjaudu ulos')}}

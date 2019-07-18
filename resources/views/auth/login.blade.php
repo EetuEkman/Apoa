@@ -88,9 +88,9 @@
                 </span>
             </p>
             @error('email')
-                <span class="is-danger">
-                    <strong>{{ $message }}</strong>
-                </span>
+            <span class="is-danger">
+                <strong>{{ $message }}</strong>
+            </span>
             @enderror
             <p class="control has-icons-left">
                 <input type="password" class="input @error('password') is-danger @enderror" name="password" placeholder="{{__('Salasana')}}">
@@ -99,9 +99,9 @@
                 </span>
             </p>
             @error('password')
-                <span class="is-danger">
-                    <strong>{{ $message }}</strong>
-                </span>
+            <span class="is-danger">
+                <strong>{{ $message }}</strong>
+            </span>
             @enderror
             <p class="control">
                 <label class="checkbox">
@@ -120,4 +120,3 @@
     </div>
 </article>
 @endsection
-

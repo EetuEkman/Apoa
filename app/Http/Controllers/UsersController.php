@@ -22,5 +22,16 @@ class UsersController extends Controller
             'users' => $users
         ]);
     }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        $groups = Groups::all();
+
+        return view('users/edit', [
+            'user' => $user,
+            'groups' => $groups
+        ]);
+    }
 }
 

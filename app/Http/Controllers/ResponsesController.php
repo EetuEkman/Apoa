@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Response;
+use App\Assessment;
 
 class ResponsesController extends Controller
 {
@@ -34,7 +35,11 @@ class ResponsesController extends Controller
      */
     public function create()
     {
-        return view('/responses/create');
+        $assessments = Assessment::all();
+
+        return view('/responses/create', [
+            'assessments' => $assessments
+        ]);
     }
 
     /**

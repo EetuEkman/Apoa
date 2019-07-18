@@ -54,7 +54,7 @@ class AssessmentsController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'user_id' => 'required',
+            'user_id' => 'required|integer',
             'title' => 'required',
             'body' => 'required'
         ]);

@@ -1,6 +1,8 @@
 @extends("layouts/layout")
 @section("title", "Vastaukset")
 @section("content")
+    <!--
+
     <div class="container">
        <table id="myTable">
           <tr>
@@ -17,7 +19,15 @@
         <canvas id="myChart" width="100" height="500"></canvas>
     </div>
 
-    <div id="vueList" class="container">
+    -->
+
+    <div>
+        <table>
+            
+        </table>
+    </div>
+
+    <div id="assessmentList" class="container">
         <ul style="list-style-type: none;">
             <li v-for="assessment in assessments">
                 <ul>
@@ -83,7 +93,7 @@
         });
 
         var wm = new Vue({
-           el: '#vueList',
+           el: '#assessmentList',
            data: {
                assessments: filteredAssessments
            },
@@ -92,6 +102,8 @@
             }
         });
     </script>
+
+    <!--
 
     <script defer>
         const myTable = document.getElementById('myTable');
@@ -232,4 +244,7 @@
             myChart.update();
         }
     </script>
+
+    -->
+
 @endsection

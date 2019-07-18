@@ -29,8 +29,10 @@
 <section class="hero is-fullheight is-primary is-medium is-bold">
     <div class="hero-body">
         <div class="container">
-            <div class="columns is-centered">
-                @yield("content")
+            <div class="columns is-centered is-vcentered">
+                <div class="column is-one-quarter">
+                    @yield("content")
+                </div>
             </div>
         </div>
     </div>

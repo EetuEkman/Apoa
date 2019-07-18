@@ -23,8 +23,8 @@
         <input type="text" name="year" value="{{ old('year') }}" tabindex="3"><br>
         <label for="semester">Lukukausi, syksy/kevät</label><br>
         <input type="text" name="semester" value="{{ old('semester') }}" tabindex="4"><br>
-        <input type="submit" value="Ok">    
+        <input type="submit" class="button is-success" value="Ok">    
     </form>
 
-    <button onclick="window.location.href='/groups'">Peruuta</button>
+    <button class="button is-link" onclick="window.location.href='/groups'">Peruuta</button>
 @endsection
