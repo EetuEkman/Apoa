@@ -41,7 +41,6 @@
         },
         methods: {
             toggle: function() {
-                console.log("clicked")
                 this.isActive = !this.isActive;
             }
         }

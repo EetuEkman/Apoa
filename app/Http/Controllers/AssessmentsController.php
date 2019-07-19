@@ -22,12 +22,14 @@ class AssessmentsController extends Controller
      */
     public function index()
     {
-        //$assessments = Assessment::all();
-
-        $assessments = Assessment::where('user_id', Auth::user()->id)->with('user')->get();
+        $assessments = Assessment::where('user_id', Auth::user()->id)->with('user');
+        //$user = User::find(auth()->user()->id);
+        //$groups = $user->groups;
+        $groups = User::find(auth()->user()->id)->groups()->get();
 
         return view('assessments/index', [
-            'assessments' => $assessments,
+            'assessments' => $assessments->get(),
+            'groups' => $groups
         ]);
     }
 
