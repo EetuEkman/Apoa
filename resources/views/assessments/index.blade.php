@@ -3,7 +3,9 @@
 @section("content")
 <div class="columns is-centered is-vcentered">
     <div class="column is-half">
-        
+        {{$assessments[0]}}
+        <hr>
+        {{$groups}}
         <h1>Arvioinnit</h1>
         <table id="assessments" class="table is-bordered is-striped is-narrow is-hoverable" name="assessments">
             <thead>

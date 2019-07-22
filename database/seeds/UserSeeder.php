@@ -16,7 +16,8 @@ class UserSeeder extends Seeder
             'role_id' => 1,
             'first_name' => 'Olli',
             'last_name' => 'Opettaja',
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
+            'api_token' => Str::random(60)
         ]);
 
         DB::table('users')->insert([
@@ -24,7 +25,8 @@ class UserSeeder extends Seeder
             'role_id' => 2,
             'first_name' => 'Ossi',
             'last_name' => 'Opiskelija',
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
+            'api_token' => Str::random(60)
         ]);
 
         DB::table('users')->insert([
@@ -32,7 +34,8 @@ class UserSeeder extends Seeder
             'role_id' => 1,
             'first_name' => 'Onni',
             'last_name' => 'Opettaja',
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
+            'api_token' => Str::random(60)
         ]);
 
         DB::table('users')->insert([
@@ -40,7 +43,8 @@ class UserSeeder extends Seeder
             'role_id' => 2,
             'first_name' => 'Oiva',
             'last_name' => 'Opiskelija',
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
+            'api_token' => Str::random(60)
         ]);
 
         DB::table('users')->insert([
@@ -48,7 +52,8 @@ class UserSeeder extends Seeder
             'role_id' => 1,
             'first_name' => 'Oodi',
             'last_name' => 'Opettaja',
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
+            'api_token' => Str::random(60)
         ]);
 
         DB::table('users')->insert([
@@ -56,7 +61,8 @@ class UserSeeder extends Seeder
             'role_id' => 2,
             'first_name' => 'Olavi',
             'last_name' => 'Opiskelija',
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
+            'api_token' => Str::random(60)
         ]);
 
         DB::table('users')->insert([
@@ -64,7 +70,8 @@ class UserSeeder extends Seeder
             'role_id' => 2,
             'first_name' => 'Teppo',
             'last_name' => 'Testaaja',
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
+            'api_token' => Str::random(60)
         ]);
     }
 }

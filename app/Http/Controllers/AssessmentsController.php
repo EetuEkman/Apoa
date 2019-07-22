@@ -22,13 +22,20 @@ class AssessmentsController extends Controller
      */
     public function index()
     {
-        $assessments = Assessment::where('user_id', Auth::user()->id)->with('user');
+        /*
+        $assessments = Assessment::with(['user' => function($query) {
+            return $query->select(['id', 'first_name', 'last_name']);
+        }])->get();
+        */
+        $assessments = Assessment::with('user:id,first_name,last_name')->get();
+
+        //$assessments = Assessment::where('user_id', Auth::user()->id)->with('user');
         //$user = User::find(auth()->user()->id);
         //$groups = $user->groups;
         $groups = User::find(auth()->user()->id)->groups()->get();
 
         return view('assessments/index', [
-            'assessments' => $assessments->get(),
+            'assessments' => $assessments,
             'groups' => $groups
         ]);
     }

@@ -15,6 +15,7 @@
                 <a class="navbar-item" href="/responses/create">Jätä vastaus</a>
                 <a class="navbar-item" href="/responses">Omat vastaukset</a>
             @else
+                <a class="navbar-item" href="/students">Omat opiskelijat</a>
                 <a class="navbar-item" href="/assessments">Arvioinnit</a>
                 <a class="navbar-item" href="/users">Käyttäjät</a>
                 <a class="navbar-item" href="/groups">Luokat</a>

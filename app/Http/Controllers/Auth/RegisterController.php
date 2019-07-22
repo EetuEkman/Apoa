@@ -76,7 +76,8 @@ class RegisterController extends Controller
             'last_name' => $data['lastName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id' => (int)$data['role']
+            'role_id' => (int)$data['role'],
+            'api_token' => Str::random(60)
         ]);
     }
 
