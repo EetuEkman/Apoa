@@ -59,5 +59,11 @@ class GroupUserSeeder extends Seeder
             'user_id' => 7,
             'created_at' => Carbon::now()
         ]);
+
+        DB::table('group_user')->insert([
+            'group_id' => 2,
+            'user_id' => 8,
+            'created_at' => Carbon::now()
+        ]);
     }
 }

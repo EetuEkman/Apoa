@@ -73,5 +73,14 @@ class UserSeeder extends Seeder
             'password' => bcrypt('secret'),
             'api_token' => Str::random(60)
         ]);
+
+        DB::table('users')->insert([
+            'email' => 'ongelma.opettaja@savonia.fi',
+            'role_id' => 1,
+            'first_name' => 'Ongelma',
+            'last_name' => 'Opettaja',
+            'password' => bcrypt('secret'),
+            'api_token' => Str::random(60)
+        ]);
     }
 }

@@ -1,4 +1,4 @@
-<navbar id="burger" class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+<navbar id="burger" name="navigation" class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/home">
             Apoa

@@ -1,3 +1,10 @@
-//Bulma
-@import "~bulma/bulma.sass";
-@import "~font-awesome/scss/font-awesome.scss";
+$apoaBackground: #86318C;
+$apoaPrimary: #5453A3;
+$apoaLink: #2AABE2;
+$apoaAccent: #F69DB1;
+
+$primary: $apoaPrimary;
+$link: $apoaLink;
+
+@import "~bulma/bulma";
+@import "~font-awesome/scss/font-awesome";
