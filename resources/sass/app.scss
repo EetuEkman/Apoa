@@ -2,9 +2,13 @@ $apoaBackground: #86318C;
 $apoaPrimary: #5453A3;
 $apoaLink: #2AABE2;
 $apoaAccent: #F69DB1;
+$lightGray: E0E0E0;
 
 $primary: $apoaPrimary;
 $link: $apoaLink;
+
+$table-head-background-color: $apoaPrimary;
+$table-body-background-color: $lightGray;
 
 @import "~bulma/bulma";
 @import "~font-awesome/scss/font-awesome";

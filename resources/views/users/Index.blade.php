@@ -2,7 +2,7 @@
 @section('title', 'Käyttäjät')
 @section("content")
 <div class="columns is-centered is-vcentered">
-    <div class="column is-half">
+    <div class="column is-half has-text-centered">
         <h1>Käyttäjät</h1>
         <table id="users" class="table is-bordered is-striped is-narrow is-hoverable" name="users">
             <thead>
@@ -21,7 +21,7 @@
                     <td>{{$user->last_name}}</td>
                     <td>{{$user->role->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td></td>
+                    <td>@foreach($user->groups as $group){{$group->name.', '}}@endforeach</td>
                 </tr>
                 @endforeach
             </tbody>

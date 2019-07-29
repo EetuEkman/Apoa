@@ -77,8 +77,6 @@
         // and add as an array of response objects for assessment
 
         firstResponses.forEach(function(firstResponse) {
-            //[{response1, assessment_id=1},{response, assessment_id=2}]
-
             // Get the responses where assessment_id equals assessments id as an array
 
             let filteredResponses = responses.filter(function(response) {
@@ -103,7 +101,7 @@
         });
     </script>
 
-    <!--
+    {{--
 
     <script defer>
         const myTable = document.getElementById('myTable');
@@ -245,6 +243,6 @@
         }
     </script>
 
-    -->
+    --}}
 
 @endsection

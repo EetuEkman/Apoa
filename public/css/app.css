@@ -4076,7 +4076,7 @@ fieldset[disabled] .button {
 }
 
 .table thead {
-  background-color: transparent;
+  background-color: #5453A3;
 }
 
 .table thead td,
@@ -4096,7 +4096,7 @@ fieldset[disabled] .button {
 }
 
 .table tbody {
-  background-color: transparent;
+  background-color: E0E0E0;
 }
 
 .table tbody tr:last-child td,

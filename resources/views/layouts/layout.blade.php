@@ -18,7 +18,6 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <script src="{{asset('js/app.js')}}"></script>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
     <script>
         @if(isset($responses))
             //Convert the php variable to json
@@ -35,22 +34,12 @@
 
 <body class="has-navbar-fixed-top">
     @include('partials.navigation')
-    <div class="content">
+    <div id="app" class="content">
         <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         @yield('content')
     </div>
-
-    <script defer>
-        export default {
-            data: function() {
-                return {
-                    isOpen: false
-                } 
-            }
-        }
-    </script>
 </body>
 
 </html>

@@ -57,3 +57,20 @@ DB_DATABASE=developmentdb
 DB_USERNAME=root  
 DB_PASSWORD=
 ~~~~
+
+#### Riippuvuudet
+
+Riippuvuuksia ei sisällytetä versionhallintaan. Riippuvuudet asennetaan paketinhallintajärjestelmien avulla.
+Kloonatessa versionhallinnasta käyttäjän on ladattava riippuvuudet.
+
+##### Composer
+
+Composer-paketinhallintajärjestelmä vastaa php-riippuvuuksista.
+Composer resolvaa tarvittavat riippuvuudet komennolla `composer install`.
+Riippuvuudet ladataan projektikansion vendor-kansioon.
+
+##### Npm
+
+Npm-paketinhallintajärjestelmä vastaa javascript-riippuvuuksista.
+Npm asentaa riippuvuudet komennolla `npm install`.
+Riippuvuudet ladataan projektikansion node_modules-kansioon.

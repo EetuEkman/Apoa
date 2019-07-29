@@ -1,15 +1,15 @@
-<navbar id="burger" name="navigation" class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/home">
             Apoa
         </a>
-        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" v-on:click="toggle" v-bind:class="{'is-active': isActive}">
+        <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false" data-target="navigationMenu">
             <span></span>
             <span></span>
             <span></span>
         </a>
     </div>
-    <div class="navbar-menu" v-bind:class="{'is-active': isActive}">
+    <div id="navigationMenu" class="navbar-menu">
         <div class="navbar-start">
             @if(auth()->user()->role_id == 2)
                 <a class="navbar-item" href="/responses/create">Jätä vastaus</a>
@@ -22,7 +22,7 @@
             @endif
         </div>
         <div class="navbar-end">
-            <a class="navbar-item" href="users/{{auth()->user()->id}}/edit">{{auth()->user()->email}}</a>
+            <a class="navbar-item" href="/users/{{auth()->user()->id}}/edit">{{auth()->user()->email}}</a>
             <a class="navbar-item" href="/logout"
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 {{__('Kirjaudu ulos')}}
@@ -32,18 +32,31 @@
             </form>
         </div>
     </div>
-</navbar>
+</nav>
 
-<script defer>
-    new Vue({
-        el: '#burger',
-        data: {
-            isActive: false
-        },
-        methods: {
-            toggle: function() {
-                this.isActive = !this.isActive;
-            }
+<script>
+    // Toggles the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+        
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+            
+            // Add a click event on each of them
+            $navbarBurgers.forEach( el => {
+                el.addEventListener('click', () => {
+                    
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+                    
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+                });
+            });
         }
     });
 </script>
