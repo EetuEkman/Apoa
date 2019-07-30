@@ -35,7 +35,7 @@ class ResponsesController extends Controller
      */
     public function create()
     {
-        $assessments = Assessment::all();
+        $assessments = Assessment::with('user:id,first_name,last_name')->get();
 
         return view('/responses/create', [
             'assessments' => $assessments

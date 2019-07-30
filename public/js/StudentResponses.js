@@ -1,4 +1,4 @@
-var responsesSection = document.getElementById('assessments');
+const section = document.getElementById('assessments');
 
 // Goal here is to transform the json from the server
 // to more logical form for looping and displaying
@@ -81,7 +81,7 @@ const options = {
     }
 };
 
-assessmentsToCharts(assessments, responsesSection);
+assessmentsToCharts(assessments, section);
 
 // Create tables with elements and chart for each assessment
 function assessmentsToCharts(jsonArray, parentElement) {
@@ -137,6 +137,31 @@ function assessmentsToCharts(jsonArray, parentElement) {
             return {date: response.created_at, grade: response.grade};
         });
 
+        //Sort the dates and grades by the earliest date
+        datesGrades.sort(function(a, b) {
+            a = new Date(a.date);
+            b = new Date(b.date);
+
+            if(a < b)
+            {
+                return -1;
+            }
+            else
+            {
+                if(a > b)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+            //Ternary version
+            //return a < b ? -1 : a > b ? 1 : 0;
+        });
+
         let dates = datesGrades.map(function(dateGrade) {
             return dateGrade.date;
         });
@@ -147,11 +172,13 @@ function assessmentsToCharts(jsonArray, parentElement) {
 
         let canvas = document.createElement("canvas");
         canvas.setAttribute('width', '200');
-        canvas.setAttribute('height', '100');
+        canvas.setAttribute('height', '50');
 
         let context = canvas.getContext('2d');
 
-        var gradientStroke = context.createLinearGradient(800, 0, 200, 0);
+        // Interesting color gradient for the line
+
+        let gradientStroke = context.createLinearGradient(800, 0, 400, 0);
         gradientStroke.addColorStop(0, "#86318C");
         gradientStroke.addColorStop(1, "#F69DB1");
 
@@ -161,7 +188,7 @@ function assessmentsToCharts(jsonArray, parentElement) {
                 labels: dates,
                 datasets: [
                     {
-                        label: 'Arvosanat päivämäärittäin',
+                        label: 'Arvosana',
                         data: grades,
                         borderColor: gradientStroke,
                         pointBorderColor: gradientStroke,
@@ -182,7 +209,7 @@ function assessmentsToCharts(jsonArray, parentElement) {
         // Table for responses
 
         let responseTable = document.createElement('table');
-        responseTable.classList.add('table', 'is-bordered');
+        responseTable.classList.add('table', 'is-bordered', 'is-striped', 'is-hoverable', 'is-narrow');
 
         // Thead for response table
 
@@ -229,5 +256,7 @@ function assessmentsToCharts(jsonArray, parentElement) {
 
         parentElement.appendChild(div);
 
+        let br = document.createElement("br");
+        parentElement.appendChild(br);
     });
 }
