@@ -7,5 +7,5 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/StudentResponses.js') }}"></script>
+    <script src="{{ asset('js/responses.js') }}"></script>
 @endsection

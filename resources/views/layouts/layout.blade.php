@@ -19,6 +19,9 @@
     <script src="{{asset('js/app.js')}}"></script>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <script>
+        @isset($assessments)
+            const assessments = JSON.parse('{!!json_encode($assessments)!!}');
+        @endisset
         @if(isset($responses))
             //Convert the php variable to json
             //and substring out the dates from the datetimes

@@ -9,7 +9,7 @@
 
             <section id="assessments"></section>
 
-            <script src="{{ asset('js/StudentResponses.js') }}" defer></script>
+            <script src="{{ asset('js/responses.js') }}" defer></script>
         </div>
     </div>
 @endsection

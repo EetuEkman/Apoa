@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Response;
 use App\Assessment;
+use App\Response;
+use App\User;
 
 class ResponsesController extends Controller
 {
+    protected $redirectTo = '/home';
+
     function __construct()
     {
         $this->middleware('auth');
@@ -50,7 +53,24 @@ class ResponsesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'id' => 'required|integer',
+            'assessment_id' => 'required|integer',
+            'grade' => 'required|integer|between:1,5'
+        ]);
+
+        $user = User::findOrFail($request->id);
+        $assessment = Assessment::findOrFail($request->assessment_id);
+
+        $response = new Response();
+        $response->grade = $request->grade;
+        $response->body = $request->body;
+        $response->user()->associate($user);
+        $response->assessment()->associate($assessment);
+
+        $response->save();
+
+        return redirect('home');
     }
 
     /**

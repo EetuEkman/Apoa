@@ -178,7 +178,7 @@ function assessmentsToCharts(jsonArray, parentElement) {
 
         // Interesting color gradient for the line
 
-        let gradientStroke = context.createLinearGradient(800, 0, 400, 0);
+        let gradientStroke = context.createLinearGradient(550, 0, 400, 0);
         gradientStroke.addColorStop(0, "#86318C");
         gradientStroke.addColorStop(1, "#F69DB1");
 

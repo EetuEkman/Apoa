@@ -23,6 +23,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/users', 'UsersController@index');
 Route::get('/users/{id}/edit', 'UsersController@edit');
+Route::patch('users/{id}', 'UsersController@update');
 
 Route::resource('groups', 'GroupsController');
 
