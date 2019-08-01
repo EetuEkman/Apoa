@@ -63,3 +63,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/students', 'StudentsController@index');
 Route::get('/students/{id}', 'StudentsController@show');
+
+Route::get('/users/{id}/password', 'UsersController@changePasswordForm');
+Route::patch('/users/{id}/password', 'UsersController@changePassword');

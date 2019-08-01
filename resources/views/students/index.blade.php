@@ -6,7 +6,7 @@
             <script defer>
                 console.log(JSON.stringify({!! json_encode($groups) !!}, null, 2))
             </script>
-            
+
             @isset($groups)
                 @foreach($groups as $group)
                     <table class="table is-bordered is-narrow">
@@ -33,7 +33,7 @@
                                 </tr>
                                 @empty
                                     <tr>
-                                        <td>Luokalla ei muita jäseniä.</td>
+                                        <td colspan="5">Luokalla ei muita jäseniä.</td>
                                     </tr>
                             @endforelse
                         </tbody>

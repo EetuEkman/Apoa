@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
 use App\Group;
-use function Sodium\add;
+use Validator;
+use Hash;
 
 class UsersController extends Controller
 {
@@ -36,7 +37,8 @@ class UsersController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $validatedData = $request->validate([
             'first_name' => 'alpha',
             'last_name' => 'alpha',
@@ -50,30 +52,67 @@ class UsersController extends Controller
 
         $user->last_name = $request->last_name;
 
+        // Get the array of group ids from the groups the user is part of.
+
         $groups = $user->groups()->select('group_id')->get()->toArray();
 
-        $groupIds = array_map(function($element) {
+        $groupIds = array_map(function ($element) {
             return (String)$element['group_id'];
         }, $groups);
 
-        dd($groupIds, $request->group);
+        // Only detach and attach the groups if the users groups were changed.
 
-        /*
-        $groupIds = $groups->map(function($item, $key) {
-            return item->
-        });
-        */
+        // dd($groupIds, $request->group);
 
-        $user->groups()->detach();
+        $difference = array_diff($groupIds, $request->group);
 
-        foreach($request->group as $element)
+        if (count($difference) > 0)
         {
-            $group = Group::find($element);
+            $user->groups()->detach();
 
-            $user->groups()->attach($group);
+            foreach ($request->group as $element) {
+                $group = Group::find($element);
+
+                $user->groups()->attach($group);
+            }
         }
 
         $user->save();
+
+        return redirect('/users/'.$id."/edit");
+    }
+
+    public function changePasswordForm(Request $request, $id)
+    {
+        return view('users/password');
+    }
+
+    public function changePassword(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required',
+            'newPassword' => 'required|string|min:6|confirmed'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('users/'.$id.'/password')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if (!(Hash::check($request->get('password'), Auth::user()->password))) {
+            return redirect()->back()->with('mismatch', 'Väärä salasana.');
+        }
+
+        if(strcmp($request->get('password'), $request->get('newPassword')) == 0){
+            return redirect()->back()->with("duplicate", "Uusi salasana ei voi olla sama kuin nykyinen salasana.");
+        }
+
+        $user = Auth::user();
+        $user->password = bcrypt( $request->get('newPassword'));
+        $user->save();
+
+        return redirect('/users/'.$id.'/edit')->with('success', 'Salasana vaihdettu!');
     }
 }
 

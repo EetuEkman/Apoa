@@ -56,7 +56,7 @@ class ResponsesController extends Controller
         $validatedData = $request->validate([
             'id' => 'required|integer',
             'assessment_id' => 'required|integer',
-            'grade' => 'required|integer|between:1,5'
+            'grade' => 'required|integer|between:1,5',
         ]);
 
         $user = User::findOrFail($request->id);
@@ -70,7 +70,7 @@ class ResponsesController extends Controller
 
         $response->save();
 
-        return redirect('home');
+        return redirect('/home');
     }
 
     /**
