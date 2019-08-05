@@ -4,22 +4,24 @@
     <div class="columns is-centered">
         <div class="column is-half">
             <section id="assessment">
-                <table class="table is-narrow">
-                    <tbody>
-                    <tr>
-                        <th>Esittäjä</th>
-                        <td id="assessmentAuthor"></td>
-                    </tr>
-                        <tr>
-                            <th>Otsikko</th>
-                            <td id="assessmentTitle"></td>
-                        </tr>
-                        <tr>
-                            <th>Kysymys</th>
-                            <td id="assessmentBody"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="field">
+                    <label class="label">Otsikko</label>
+                    <div class="control">
+                        <p id="assessmentTitle"></p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Kysymys</label>
+                    <div class="control">
+                        <p id="assessmentBody"></p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Esittäjä</label>
+                    <div class="control">
+                        <p id="assessmentAuthor"></p>
+                    </div>
+                </div>
             </section>
             <hr>
             <section id="assessmentForm">
@@ -40,7 +42,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Arvio</label>
+                    <label class="label">Oma arvio</label>
                     <div class="control">
                         <textarea class="textarea" name="body" placeholder="" form="responseForm"></textarea>
                     </div>
@@ -57,7 +59,7 @@
             </form>
         </div>
     </div>
-
+    
     @isset($assessments)
         <script src="{{asset('js/createResponse.js')}}" defer></script>
     @endisset

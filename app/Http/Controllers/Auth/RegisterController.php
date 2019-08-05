@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Group;
+use App\Role;
+use App\Rules\RoleSecret;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Role;
-use App\Group;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -50,15 +52,19 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        if(!array_key_exists('secret', $data))
+        {
+            $data['secret'] = "";
+        }
+
         return Validator::make($data, [
             'firstName' => ['required', 'string', 'max:255'],
             'lastName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
-            'group' => ['required'],
-            'role' => ['required']
-
-            //ToDo: Compare the given secret with the role secret if the role id is not 2 (student)
+            'group' => ['required', 'integer'],
+            'role' => ['required', 'integer'],
+            'secret' => ['string', new RoleSecret($data['role'])],
         ]);
     }
 
@@ -70,7 +76,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user = new User();
 
+        $user->first_name = $data['firstName'];
+        $user->last_name = $data['lastName'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->api_token = Str::random(60);
+        $user->role_id = $data['role'];
+
+        $role = Role::findOrFail($data['role']);
+
+        $user->role()->associate($role);
+
+        $user->save();
+
+        $group = Group::findOrFail($data['group']);
+
+        $user->groups()->attach($group);
+
+        return $user;
+
+        /*
         return User::create([
             'first_name' => $data['firstName'],
             'last_name' => $data['lastName'],
@@ -79,6 +106,7 @@ class RegisterController extends Controller
             'role_id' => (int)$data['role'],
             'api_token' => Str::random(60)
         ]);
+        */
     }
 
     // Overriding Illuminate\Foundation\Auth\RegistersUsers

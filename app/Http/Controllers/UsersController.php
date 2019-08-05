@@ -62,8 +62,6 @@ class UsersController extends Controller
 
         // Only detach and attach the groups if the users groups were changed.
 
-        // dd($groupIds, $request->group);
-
         $difference = array_diff($groupIds, $request->group);
 
         if (count($difference) > 0)
@@ -79,7 +77,7 @@ class UsersController extends Controller
 
         $user->save();
 
-        return redirect('/users/'.$id."/edit");
+        return redirect('/users/'.$id."/edit")->with('changed', 'Muutokset tallennettu.');
     }
 
     public function changePasswordForm(Request $request, $id)
@@ -112,7 +110,7 @@ class UsersController extends Controller
         $user->password = bcrypt( $request->get('newPassword'));
         $user->save();
 
-        return redirect('/users/'.$id.'/edit')->with('success', 'Salasana vaihdettu!');
+        return redirect('/users/'.$id.'/edit')->with('success', 'Salasana vaihdettu.');
     }
 }
 

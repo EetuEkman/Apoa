@@ -1,6 +1,46 @@
 @extends('layouts/login')
 
 @section('content')
+    <article class="card is-rounded">
+        <div class="card-header">
+            <p class="card-header-title is-centered">
+                {{ __('Salasanan vaihtaminen') }}
+            </p>
+        </div>
+        <div class="card-content">
+            @if(session('status'))
+                <div class="notification is-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+            <div class="field">
+                <label class="label">{{__('Sähköpostiosoite')}}</label>
+                <p class="control">
+                    <input id="email" type="email" class="input @error('email') is-danger @enderror" name="email"
+                           value="{{ old('email') }}" required autocomplete="email" autofocus form="passwordEmail">
+                </p>
+            </div>
+            <div class="field is-grouped">
+                <p class="control">
+                    <button type="submit" class="button is-primary" form="passwordEmail">
+                        {{ __('Lähetä linkki') }}
+                    </button>
+                </p>
+                <p class="control">
+                    <a class="button is-link" href="/login">
+                        {{ __('Peruuta') }}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </article>
+    
+    <form id="passwordEmail" method="POST" action="{{ route('password.email') }}">
+        @csrf
+    </form>
+@endsection
+
+{{--
 
 <div class="container">
     <div class="row justify-content-center">
@@ -46,4 +86,6 @@
     </div>
 </div>
 
-@endsection
+--}}
+
+

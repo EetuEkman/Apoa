@@ -43,9 +43,8 @@
                     @if(auth()->user()->role_id == 2)
                         <div class="select">
                             @php
-                                $groupIdRaw = auth()->user()->groups()->select('group_id')->get();
-
-                                $groupId = $groupIdRaw[0]['group_id']
+                                $groupId = auth()->user()->groups()->select('group_id')->get()->toArray();
+                            
                             @endphp
 
                             <select name="group[]" form="editForm">
@@ -103,6 +102,17 @@
                     </p>
                 </div>
             </div>
+    
+            @if(session('changed'))
+                <div class="field is-horizontal">
+                    <div class="field-label">
+                        <label class="label"></label>
+                    </div>
+                    <div class="field-body">
+                        <span class="tag is-success is-large">{{ session('changed') }}</span>
+                    </div>
+                </div>
+            @endif
 
             @if(session('success'))
                 <div class="field is-horizontal">

@@ -60,8 +60,10 @@ const options = {
             ticks: {
                 fontStyle: 'bold',
                 max: 5,
+                min: 0,
                 maxTicksLimit: 6,
-                beginAtZero: true
+                beginAtZero: true,
+                autoSkip: false
             },
             gridLines: {
             }
@@ -171,16 +173,15 @@ function assessmentsToCharts(jsonArray, parentElement) {
         })
 
         let canvas = document.createElement("canvas");
-        canvas.setAttribute('width', '200');
-        canvas.setAttribute('height', '50');
+        canvas.setAttribute('width', '250');
+        canvas.setAttribute('height', '75');
 
         let context = canvas.getContext('2d');
 
-        // Interesting color gradient for the line
-
-        let gradientStroke = context.createLinearGradient(550, 0, 400, 0);
-        gradientStroke.addColorStop(0, "#86318C");
-        gradientStroke.addColorStop(1, "#F69DB1");
+        let gradient = context.createLinearGradient(0,0,900,300);
+        gradient.addColorStop(0,'#12c2e9');
+        gradient.addColorStop(0.5, '#c471ed');
+        gradient.addColorStop(1,'#f64f59');
 
         let myChart = new Chart(context, {
             type: 'line',
@@ -190,13 +191,13 @@ function assessmentsToCharts(jsonArray, parentElement) {
                     {
                         label: 'Arvosana',
                         data: grades,
-                        borderColor: gradientStroke,
-                        pointBorderColor: gradientStroke,
-                        pointBackgroundColor: gradientStroke,
-                        pointHoverBackgroundColor: gradientStroke,
-                        pointHoverBorderColor: gradientStroke,
+                        borderColor: gradient,
+                        pointBorderColor: gradient,
+                        pointBackgroundColor: gradient,
+                        pointHoverBackgroundColor: gradient,
+                        pointHoverBorderColor: gradient,
                         borderWidth: 4,
-                        pointRadius: 5,
+                        pointRadius: 1,
                         fill: false,
                     }
                 ]
