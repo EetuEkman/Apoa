@@ -7,6 +7,11 @@ use App\User;
 
 class StudentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //Get the groups with the user

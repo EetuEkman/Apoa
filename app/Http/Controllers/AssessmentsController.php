@@ -22,21 +22,10 @@ class AssessmentsController extends Controller
      */
     public function index()
     {
-        /*
-        $assessments = Assessment::with(['user' => function($query) {
-            return $query->select(['id', 'first_name', 'last_name']);
-        }])->get();
-        */
-        $assessments = Assessment::with('user:id,first_name,last_name')->get();
-
-        //$assessments = Assessment::where('user_id', Auth::user()->id)->with('user');
-        //$user = User::find(auth()->user()->id);
-        //$groups = $user->groups;
-        $groups = User::find(auth()->user()->id)->groups()->get();
+        $assessments = Assessment::with('user:id,first_name,last_name', 'groups:group_id,name')->get();
 
         return view('assessments/index', [
             'assessments' => $assessments,
-            'groups' => $groups
         ]);
     }
 
@@ -62,21 +51,34 @@ class AssessmentsController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'user_id' => 'required|integer',
-            'title' => 'required',
-            'body' => 'required'
+        $validatedData = $request->validate([
+            'userId' => 'required|integer',
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'groups' => 'array'
         ]);
 
         $assessment = new Assessment();
 
-        $assessment->request('title');
-        $assessment->request('body');
-        $assessment->request('user_id');
+        $assessment->title = request('title');
+        $assessment->body = request('body');
+        $assessment->user_id = request('userId');
 
         $assessment->save();
 
-        return redirect('/assessments');
+        $groupIds = request('groups');
+
+        if(is_null($groupIds) === false)
+        {
+            foreach($groupIds as $groupId)
+            {
+                $group = Group::findOrFail($groupId);
+
+                $group->assessments()->attach($assessment);
+            }
+        }
+
+        return redirect('/assessments')->with('added', 'Arviointi lisätty.');
     }
 
     /**
@@ -102,10 +104,12 @@ class AssessmentsController extends Controller
      */
     public function edit($id)
     {
-        $assessment = Assessment::findOrFail($id);
+        $assessment = Assessment::where('id', $id)->with('groups:group_id,name')->first();
+        $groups = Group::all();
 
         return view('assessments/edit', [
-            'assessment' => $assessment
+            'assessment' => $assessment,
+            'groups' => $groups
         ]);
     }
 
@@ -118,6 +122,12 @@ class AssessmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'group' => 'array'
+        ]);
+
         $assessment = Assessment::findOrFail($id);
 
         $assessment->title = request('title');
@@ -125,7 +135,26 @@ class AssessmentsController extends Controller
 
         $assessment->save();
 
-        return redirect('/assessments');
+        // Check if the assessments groups were changed
+        // and only detach and attach groups if the groups were changed.
+
+        $groups = $assessment->groups()->select('group_id')->get()->toArray();
+
+        $groupIds = array_map(function($element) {
+            return (String)$element['group_id'];
+        }, $groups);
+
+        if(count(array_diff($groupIds, $request->groups)) != 0)
+        {
+            $assessment->groups()->detach();
+
+            foreach($request->group as $element)
+            {
+                $assessment->groups()->attach(Group::find($element));
+            }
+        }
+
+        return redirect('/assessments')->with('edited', 'Arviointi muokattu.');
     }
 
     /**

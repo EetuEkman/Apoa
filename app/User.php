@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Response::class);
     }
+
+    public function groupAssessment()
+    {
+        return $this->hasManyThrough(Assessment::class, Group::class);
+    }
 }

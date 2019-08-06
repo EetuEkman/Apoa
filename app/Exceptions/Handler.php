@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // Redirects the user to the login page on expired session
+
+        if ($exception instanceof TokenMismatchException && $request->getRequestUri() === '/logout')
+        {
+            return redirect(route('login'));
+        }
+
         return parent::render($request, $exception);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Assessment;
 use App\Response;
 use App\User;
+use App\Group;
 
 class ResponsesController extends Controller
 {
@@ -38,10 +39,38 @@ class ResponsesController extends Controller
      */
     public function create()
     {
-        $assessments = Assessment::with('user:id,first_name,last_name')->get();
+        // Works
+        //$assessments = Group::find(2)->assessments()->get()->toArray();
+
+        // Does not work
+        //$assessments = auth()->user()->groups()->assessments()->get()->toArray();
+        //$assessments = User::find(auth()->id())->groups()->assessments()->get()->toArray();
+        //$assessments = User::find(auth()->id())->groupAssessment()->get()->toArray();
+
+        // Dirty hack
+        // create an array
+        // and push the results of multiple queries
+        // finally remove duplicate elements
+        // in case of multiple classes
+
+        $groups = auth()->user()->groups()->get()->toArray();
+
+        $userAssessments = array();
+
+        foreach($groups as $group)
+        {
+            $assessments = Group::find($group['id'])->assessments()->with('user:id,first_name,last_name')->get()->toArray();
+
+            foreach($assessments as $assessment)
+            {
+                array_push($userAssessments, $assessment);
+            }
+        }
+
+        $uniqueUserAssessments = array_unique($userAssessments, SORT_REGULAR);
 
         return view('/responses/create', [
-            'assessments' => $assessments
+            'assessments' => $uniqueUserAssessments
         ]);
     }
 
@@ -70,7 +99,7 @@ class ResponsesController extends Controller
 
         $response->save();
 
-        return redirect('/home');
+        return redirect('/responses')->with('responded', 'Vastaus lisätty.');
     }
 
     /**

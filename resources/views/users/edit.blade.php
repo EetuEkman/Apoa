@@ -1,6 +1,7 @@
 @extends("layouts/layout")
 @section("title", "Muokkaa käyttäjää")
 @section("content")
+    
     <div class="columns is-centered is-vcentered">
         <div class="column is-one-third">
             <div class="field is-horizontal" style="padding-top: 1%">
@@ -44,7 +45,6 @@
                         <div class="select">
                             @php
                                 $groupId = auth()->user()->groups()->select('group_id')->get()->toArray();
-                            
                             @endphp
 
                             <select name="group[]" form="editForm">

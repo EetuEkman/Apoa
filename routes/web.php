@@ -11,14 +11,6 @@
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('login');
-});
-*/
-
-//Route::get('/', 'Auth\LoginController@showLoginForm');
-
 Route::get('/', 'HomeController@index');
 
 Route::get('/users', 'UsersController@index');
@@ -33,6 +25,7 @@ Route::resource('responses', 'ResponsesController');
 
 Auth::routes();
 
+// Clarify on what the auth routes actually contain
 /*
 public function auth(array $options = [])
 {
