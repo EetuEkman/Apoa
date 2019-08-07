@@ -3,7 +3,11 @@
 @section("content")
 <div class="columns is-centered is-vcentered" style="padding-top: 1%;">
     <div class="column is-half has-text-centered">
-        <h1>Arvioinnit</h1>
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h2 class="title">Arvioinnit</h2>
+            </div>
+        </div>
         <table id="assessments" class="table is-bordered is-striped is-narrow is-hoverable" name="assessments">
             <thead>
                 <tr>

@@ -19,6 +19,11 @@ class UsersController extends Controller
 
     public function index()
     {
+        if(auth()->user()->role_id == 2)
+        {
+            abort(403);
+        }
+
         $users = User::with('role', 'groups')->get();
 
         return view('users/index', [
@@ -28,6 +33,11 @@ class UsersController extends Controller
 
     public function edit($id)
     {
+        if(auth()->id() != $id)
+        {
+            abort(403);
+        }
+
         $user = User::findOrFail($id);
         $groups = Group::all();
 
@@ -39,6 +49,11 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
+        if($request->user()->id != $id)
+        {
+            abort(403);
+        }
+
         $validatedData = $request->validate([
             'first_name' => 'alpha',
             'last_name' => 'alpha',
@@ -62,7 +77,7 @@ class UsersController extends Controller
 
         // Only detach and attach the groups if the users groups were changed.
 
-        $difference = array_diff($groupIds, $request->group);
+        $difference = array_diff($request->group, $groupIds);
 
         if (count($difference) > 0)
         {
@@ -82,11 +97,21 @@ class UsersController extends Controller
 
     public function changePasswordForm(Request $request, $id)
     {
+        if($request->user()->id != $id)
+        {
+            abort(403);
+        }
+
         return view('users/password');
     }
 
     public function changePassword(Request $request, $id)
     {
+        if($request->user()->id != $id)
+        {
+            abort(403);
+        }
+
         $validator = Validator::make($request->all(), [
             'password' => 'required',
             'newPassword' => 'required|string|min:6|confirmed'

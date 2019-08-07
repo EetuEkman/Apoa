@@ -1,122 +1,82 @@
 @extends('layouts/login')
 @section('content')
-<!--
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email')
-    is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password')
-    is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember"
-                                    id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
 <article class="card is-rounded">
     <div class="card-content">
         <h1 class="title">
             <img src="{{asset('images/apoa.png')}}" width="250" height="250" alt="logo">
         </h1>
+        
         <form action="{{route('login')}}" method="post">
             @csrf
-            <p class="control has-icons-left">
-                <input type="email" class="input @error('email') is-danger @enderror" name="email" placeholder="{{__('Sähköposti')}}">
-                <span class="icon is-left">
-                    <i class="fa fa-envelope"></i>
-                </span>
-            </p>
+            <div class="field">
+                <div class="control has-icons-left">
+                    <input type="email" class="input @error('email') is-warning @enderror" name="email"
+                           placeholder="{{__('Sähköposti')}}" required>
+                    <span class="icon is-left">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
             @error('email')
-            <span class="is-danger">
-                <strong>{{ $message }}</strong>
-            </span>
+                <div class="field">
+                    <div class="control">
+                        <span class="tag is-warning">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    </div>
+                </div>
             @enderror
-            <p class="control has-icons-left">
-                <input type="password" class="input @error('password') is-danger @enderror" name="password" placeholder="{{__('Salasana')}}">
-                <span class="icon is-left">
-                    <i class="fa fa-lock"></i>
-                </span>
-            </p>
+            
+            <div class="field">
+                <div class="control has-icons-left">
+                    <input type="password" class="input @error('password') is-warning @enderror" name="password"
+                           placeholder="{{__('Salasana')}}" required>
+                    <span class="icon is-left">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+            </div>
+            
             @error('password')
-            <span class="is-danger">
-                <strong>{{ $message }}</strong>
-            </span>
+            <div class="field">
+                <div class="control">
+                    <span class="tag is-warning">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                </div>
+            </div>
             @enderror
-            <p class="control">
-                <label class="checkbox">
-                    <input type="checkbox" name="remember" {{old('remember') ? 'checked' : ''}}>
-                    Muista minut
-                </label>
-            </p>
-            <p class="control">
-                <button class="button is-primary is-medium is-fullwidth">
-                    {{__('Kirjaudu sisään')}}
-                </button>
-            </p>
+            
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                        <input type="checkbox" name="remember" {{old('remember') ? 'checked' : ''}}>
+                        Muista minut
+                    </label>
+                </div>
+            </div>
+            
+            <div class="field">
+                <div class="control">
+                    <input type="submit" class="button is-primary is-medium is-fullwidth" value="{{__('Kirjaudu sisään')}}">
+                </div>
+            </div>
         </form>
-        <a href="{{route('register')}}" class="is-centered">{{__('Luo käyttäjätunnus')}}</a><br>
-        <a href="{{route('password.request')}}">{{ __('Unohditko salasanasi?')}}</a>
+        
+        <div class="field">
+            <div class="control">
+                <a href="{{route('register')}}" class="button is-text">{{__('Luo käyttäjätunnus')}}</a><br>
+            </div>
+        </div>
+        
+        {{-- ToDo: password reset
+        <div class="field">
+            <div class="control">
+                <a href="{{route('password.request')}}">{{ __('Unohditko salasanasi?')}}</a>
+            </div>
+        </div>
+        --}}
     </div>
 </article>
 @endsection

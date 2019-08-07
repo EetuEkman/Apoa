@@ -12,7 +12,7 @@ function createAssessmentSelect(jsonArray, parentElement) {
     let assessmentLabel = document.createElement("label");
     assessmentLabel.classList.add('label');
 
-    let assessmentLabelText = document.createTextNode('Kysely');
+    let assessmentLabelText = document.createTextNode('Arviointi');
     assessmentLabel.appendChild(assessmentLabelText);
 
     parentElement.appendChild(assessmentLabel);
@@ -31,6 +31,7 @@ function createAssessmentSelect(jsonArray, parentElement) {
     assessmentSelect.setAttribute('required', '');
     assessmentSelect.setAttribute('form', 'responseForm');
     assessmentSelect.setAttribute('name', 'assessment_id');
+    assessmentSelect.setAttribute('autofocus', '');
 
     assessmentSelect.classList.add('select');
     assessmentSelect.addEventListener("change", function() {assessmentChanged(this)});

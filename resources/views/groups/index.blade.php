@@ -1,9 +1,9 @@
 @extends("layouts/layout")
 @section("title", "Luokat")
 @section("content")
-<div class="columns is-centered is-vcentered">
-    <div class="column is-half">
-        <h1>Luokat</h1>
+<div class="columns is-centered is-vcentered" style="padding-top: 1%;">
+    <div class="column is-half has-text-centered">
+        <h2 class="title">Luokat</h2>
         <table id="groups" class="table is-bordered is-striped is-narrow">
             <thead>
                 <tr>
@@ -15,7 +15,7 @@
             <tfoot>
                 <tr>
                     <td colspan="3">
-                        <a class="button is-link" href="/groups/create">Luo luokka</a>
+                        <a class="button is-primary" href="/groups/create">Luo luokka</a>
                     </td>
                 </tr>
             </tfoot>
@@ -33,6 +33,14 @@
                 @endforeach
             </tbody>
         </table>
+        
+        @if(session('added'))
+            <div class="notification is-success">{{ session('added') }}</div>
+        @endif
+    
+        @if(session('edited'))
+            <div class="notification is-success">{{ session('edited') }}</div>
+        @endif
     </div>
 </div>
 @endsection

@@ -14,6 +14,11 @@ class StudentsController extends Controller
 
     public function index()
     {
+        if(auth()->user()->role_id === 2)
+        {
+            abort(403);
+        }
+
         //Get the groups with the user
         //with their users excluding the user.
         $groups = User::find(auth()->user()->id)->groups()
@@ -31,6 +36,11 @@ class StudentsController extends Controller
 
     public function show($id)
     {
+        if(auth()->user()->role_id == 2)
+        {
+            abort(403);
+        }
+
         $user = User::findOrFail($id);
 
         $responses = $user->responses()->with('assessment')->get();

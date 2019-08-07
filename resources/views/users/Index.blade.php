@@ -1,9 +1,14 @@
 @extends('layouts/layout')
 @section('title', 'Käyttäjät')
 @section("content")
-<div class="columns is-centered is-vcentered">
-    <div class="column is-half has-text-centered">
-        <h1>Käyttäjät</h1>
+<div class="columns is-centered is-vcentered" style="padding-top: 1%;">
+    <div class="column is-half">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h2 class="title">Käyttäjät</h2>
+            </div>
+        </div>
+        
         <table id="users" class="table is-bordered is-striped is-narrow is-hoverable" name="users">
             <thead>
                 <tr>

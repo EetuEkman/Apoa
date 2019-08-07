@@ -1,9 +1,11 @@
 @extends("layouts/layout")
 @section("title", "Vastaa")
 @section("content")
-    <div class="columns is-centered">
+    <div class="columns is-centered" style="padding-top: 1%">
         <div class="column is-half">
-            <section id="assessment">
+            <section id="assessmentForm">
+                <div id="assessmentField" class="field"></div>
+    
                 <div class="field">
                     <label class="label">Otsikko</label>
                     <div class="control">
@@ -22,10 +24,7 @@
                         <p id="assessmentAuthor"></p>
                     </div>
                 </div>
-            </section>
-            <hr>
-            <section id="assessmentForm">
-                <div id="assessmentField" class="field"></div>
+                
                 <div class="field">
                     <label class="label">Arvosana</label>
                     <div class="control">
@@ -41,12 +40,14 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="field">
                     <label class="label">Oma arvio</label>
                     <div class="control">
-                        <textarea class="textarea" name="body" placeholder="" form="responseForm"></textarea>
+                        <textarea class="textarea has-fixed-size" name="body" placeholder="" form="responseForm"></textarea>
                     </div>
                 </div>
+                
                 <div class="field is-grouped">
                     <p class="control">
                         <button type="submit" class="button is-primary" value="submit" form="responseForm">Ok</button>

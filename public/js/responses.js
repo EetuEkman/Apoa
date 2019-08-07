@@ -238,6 +238,12 @@ function assessmentsToCharts(jsonArray, parentElement) {
 
             let responseTableBodyColumnDateText = document.createTextNode(response.created_at);
             let responseTableBodyColumnGradeText = document.createTextNode(response.grade);
+
+            if(response.body === null)
+            {
+                response.body = '';
+            }
+
             let responseTableBodyColumnBodyText = document.createTextNode(response.body);
 
             responseTableBodyColumnDate.appendChild(responseTableBodyColumnDateText);

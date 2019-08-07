@@ -3,11 +3,15 @@
 @section("content")
     <div class="columns is-centered" style="padding-top: 1%;">
         <div class="column is-one-third">
-            <h2>Muokkaa arviointia</h2>
+            <div class="level">
+                <div class="level-item has-text-centered">
+                    <h2 class="title">Muokkaa arviointia</h2>
+                </div>
+            </div>
             <div class="field">
                 <label class="label">Otsikko</label>
                 <div class="control">
-                    <input type="text" class="input" name="title" form="assessmentForm" value="{{ $assessment->title }}">
+                    <input type="text" class="input" name="title" form="assessmentEdit" value="{{ $assessment->title }}">
                 </div>
             </div>
             
@@ -23,7 +27,7 @@
             <div class="field">
                 <label class="label">Kysymys</label>
                 <div class="control">
-                    <textarea class="textarea" name="body" form="assessmentForm">{{ $assessment->body }}</textarea>
+                    <textarea class="textarea" name="body" form="assessmentEdit">{{ $assessment->body }}</textarea>
                 </div>
             </div>
             
@@ -46,7 +50,7 @@
                             }, $assessment->groups->toArray());
                         @endphp
                         
-                        <select id="groups" name="groups[]" multiple form="assessmentForm" size="{{ count($groups) }}">
+                        <select id="groups" name="groups[]" multiple form="assessmentEdit" size="{{ count($groups) }}">
                             @foreach ($groups as $group)
                                 <option value="{{ $group->id }}"
                                         @if(in_array($group->id, $assessmentIds)) selected @endif>{{ $group->name }}</option>

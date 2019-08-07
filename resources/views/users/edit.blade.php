@@ -44,12 +44,12 @@
                     @if(auth()->user()->role_id == 2)
                         <div class="select">
                             @php
-                                $groupId = auth()->user()->groups()->select('group_id')->get()->toArray();
+                                $groupId = auth()->user()->groups()->select('group_id')->first()->toArray();
                             @endphp
-
+                            
                             <select name="group[]" form="editForm">
                                 @foreach($groups as $group)
-                                    <option value="{{$group->id}}" @if($group->id == $groupId) selected @endif>
+                                    <option value="{{$group->id}}" @if($group->id === $groupId['group_id']) selected @endif>
                                         {{$group->name}}
                                     </option>
                                 @endforeach

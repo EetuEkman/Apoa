@@ -1,7 +1,7 @@
 @extends('layouts/layout')
 @section('title', 'Omat opiskelijat')
 @section("content")
-    <div class="columns is-centered is-vcentered">
+    <div class="columns is-centered is-vcentered" style="padding-top: 1%;">
         <div class="column is-half">
             <script defer>
                 console.log(JSON.stringify({!! json_encode($groups) !!}, null, 2))
@@ -11,7 +11,11 @@
                 @foreach($groups as $group)
                     <table class="table is-bordered is-narrow">
                         <thead>
-                            <h3>{{$group->name}}</h3>
+                            <div class="level">
+                                <div class="level-item has-text-centered">
+                                    <h2 class="title">{{$group->name}}</h2>
+                                </div>
+                            </div>
                         </thead>
                         <tbody>
                             <tr>

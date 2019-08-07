@@ -11,6 +11,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Comment this call method and uncomment
+        // the latter to run seeders aimed at development
+
+        $this->call([
+            ProductionSeeder::class
+        ]);
+
+        // Uncomment this call method and comment
+        // the former to run seeder aimed at the production
+        /*
         $this->call([
             RoleSeeder::class,
             GroupSeeder::class,
@@ -19,5 +29,6 @@ class DatabaseSeeder extends Seeder
             ResponseSeeder::class,
             GroupUserSeeder::class
         ]);
+        */
     }
 }

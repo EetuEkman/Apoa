@@ -22,6 +22,11 @@ class AssessmentsController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->role_id === 2)
+        {
+            abort(403);
+        }
+
         $assessments = Assessment::with('user:id,first_name,last_name', 'groups:group_id,name')->get();
 
         return view('assessments/index', [
@@ -36,6 +41,11 @@ class AssessmentsController extends Controller
      */
     public function create()
     {
+        if(auth()->user()->role_id === 2)
+        {
+            abort(403);
+        }
+
         $groups = Group::all();
 
         return view('assessments/create', [
@@ -51,6 +61,11 @@ class AssessmentsController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->user()->role_id === 2)
+        {
+            abort(403);
+        }
+
         $validatedData = $request->validate([
             'userId' => 'required|integer',
             'title' => 'required|string',
@@ -89,6 +104,11 @@ class AssessmentsController extends Controller
      */
     public function show($id)
     {
+        if(auth()->user()->role_id === 2)
+        {
+            abort(403);
+        }
+
         $assessment = Assessment::findOrFail($id);
 
         return view('/assessments', [
@@ -104,6 +124,11 @@ class AssessmentsController extends Controller
      */
     public function edit($id)
     {
+        if(auth()->user()->role_id === 2)
+        {
+            abort(403);
+        }
+
         $assessment = Assessment::where('id', $id)->with('groups:group_id,name')->first();
         $groups = Group::all();
 
@@ -122,6 +147,11 @@ class AssessmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->user()->role_id === 2)
+        {
+            abort(403);
+        }
+
         $validatedData = $request->validate([
             'title' => 'required|string',
             'body' => 'required|string',
