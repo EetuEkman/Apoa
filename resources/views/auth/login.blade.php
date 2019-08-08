@@ -48,6 +48,7 @@
             </div>
             @enderror
             
+            {{--
             <div class="field">
                 <div class="control">
                     <label class="checkbox">
@@ -56,6 +57,7 @@
                     </label>
                 </div>
             </div>
+            --}}
             
             <div class="field">
                 <div class="control">

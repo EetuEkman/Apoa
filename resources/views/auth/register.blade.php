@@ -160,14 +160,14 @@
     
                     <div class="field is-horizontal">
                         <div class="field-label">
-                            <label class="label is-normal">Luokka</label>
+                            <label class="label is-normal">Ryhmätunnus</label>
                         </div>
                         <div class="field-body">
                             <div class="field">
                                 <div class="control is-expanded">
                                     <div class="select is-fullwidth">
                                         <select id="group" name="group" required>
-                                            <option selected disabled hidden>Luokkatunnus</option>
+                                            <option selected disabled hidden>Ryhmätunnus</option>
                             
                                             @foreach($groups as $group)
                                                 <option value="{{ $group->id }}">{{ $group->name}}</option>
@@ -190,11 +190,13 @@
                                 <div class="control is-expanded">
                                 <span class="select is-fullwidth">
                                     <select id="role" name="role" required onchange="toggleSecret()">
-                                        <option selected disabled hidden>{{__('Valitse')}}</option>
-
+                                        <option value="2">Opiskelija</option>
+                                        <option value="1">Opettaja</option>
+                                        {{--
                                         @foreach($roles as $role)
                                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                                         @endforeach
+                                        --}}
                                     </select>
                                 </span>
                                 </div>

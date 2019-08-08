@@ -18,31 +18,34 @@
                         <p id="assessmentBody"></p>
                     </div>
                 </div>
+                
+                {{--
                 <div class="field">
                     <label class="label">Esittäjä</label>
                     <div class="control">
                         <p id="assessmentAuthor"></p>
                     </div>
                 </div>
+                --}}
                 
                 <div class="field">
-                    <label class="label">Arvosana</label>
+                    <label class="label">Arvioni</label>
                     <div class="control">
                         <div class="select">
                             <select name="grade" form="responseForm" required>
-                                <option selected disabled hidden>Valitse arvosana</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
+                                <option selected disabled hidden>Valitse</option>
+                                <option value="1">5</option>
+                                <option value="2">4</option>
                                 <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                <option value="4">2</option>
+                                <option value="5">1</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 
                 <div class="field">
-                    <label class="label">Oma arvio</label>
+                    <label class="label">Sanallinen arvioni</label>
                     <div class="control">
                         <textarea class="textarea has-fixed-size" name="body" placeholder="" form="responseForm"></textarea>
                     </div>
